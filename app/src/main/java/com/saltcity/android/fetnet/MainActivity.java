@@ -1,11 +1,13 @@
 package com.saltcity.android.fetnet;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.support.v7.widget.Toolbar;
 
 import com.alamkanak.weekview.WeekView;
+import com.alamkanak.weekview.WeekViewEvent;
 import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
 import com.mikepenz.materialdrawer.Drawer;
@@ -17,18 +19,27 @@ import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 
+import java.util.List;
 import java.util.Set;
 
 
 public class MainActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
+    private WeekView mWeekView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        findViewById(R.id.buttonBasic).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, BasicActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
         new DrawerBuilder().withActivity(this).build();
@@ -70,8 +81,17 @@ public class MainActivity extends AppCompatActivity {
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                     @Override
                     public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
-                        // do something with the clicked item :D
-                    return false;}
+                        switch (position) {
+
+                            case 3:
+                                Intent schedule = new Intent(MainActivity.this, BasicActivity.class);
+                                startActivity(schedule);
+                            case 4:
+                                Intent subjects = new Intent(MainActivity.this, AsynchronousActivity.class);
+                                startActivity(subjects);
+                        }
+                        return false;
+                    }
                 })
                 .build();
     }

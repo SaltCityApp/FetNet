@@ -27,4 +27,6 @@ dependencies {
     compile('com.mikepenz:materialdrawer:5.0.4@aar') {
         transitive = true
     }
+    compile fileTree(dir: 'libs', include: ['AndroidWeekView'])
+    compile 'com.squareup.retrofit:retrofit:1.9.0'
 }
